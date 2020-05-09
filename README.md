@@ -11,7 +11,8 @@ Python Scripts to monitor and control elements of your network from a compatible
 
 ## Usage:
 
-Note: these hotkeys work no matter which program is in focus, alth
+Note: these hotkeys work no matter which program is in focus.
+
 To select a host to monitor, press shift + its corresponding F key, or shift+esc for localhost. When monitoring a host, keys q-p represent CPU usage, a-; represent RAM usage, and z-/ represent disk usage of the partition mounted at /. 
 
 To shutdown or reboot the selected host, press ctrl+num5 and the number pad should start flashing in an X pattern. This pattern means that the power control keys are 'armed' and will be active for about 10 seconds. Once armed, press ctrl+home to reboot and ctrl+end to poweroff the remote host.
@@ -51,7 +52,7 @@ If the keyboard flashes red when you select a host for monitoring, either the ho
     
 ## Compatability:
 
-So far, desktop.py has been tested on Ubuntu 20.04 LTS with a logitech G810 but should work on nearly all linux. server.py has been tested on Proxmox VE 6.1, Ubuntu server 20.04 LTS, and Fedora Server Edition 32 but should work on anything that can run python and pip3, although shutdown and reboot won't currently work on Windows hosts.
+So far, desktop.py has been tested on Ubuntu 20.04 LTS with a logitech G810 but should work on nearly all linux. Also, server.py has been tested on Proxmox VE 6.1, Ubuntu server 20.04 LTS, and Fedora Server Edition 32 but should work on anything that can run python and pip3, although shutdown and reboot won't currently work on Windows hosts.
 
 ## Next Steps:
 

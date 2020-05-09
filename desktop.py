@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import os
 import time
+import platform
 import keyboard
 import socket
 import pickle

@@ -4,6 +4,11 @@ import psutil
 import socket
 import time
 import pickle
+import platform
+osType = platform.system()
+if osType != 'Windows' and os.geteuid() != 0:
+	    print("Please execute this script with root!")
+	    exit()
 time.sleep(8) #wait for operating system to initialize networking before registering socket
 HOST = socket.gethostbyaddr(socket.gethostname())[2][0]
 PORT = 65432
@@ -26,9 +31,13 @@ while True:
                     conn.send(b'ok')
                     print("Got Reboot Command")
                     time.sleep(0.2)
-                    os.system("reboot")
+                    if osType == 'Windows': os.system('shutdown /r')
+                    if osType == 'Linux': os.system("reboot")
+                    if osType == 'Darwin': os.system("shutdown -r now")
                 elif data == b'poweroff':
                     conn.send(b'ok')
                     print("Got Poweroff Command")
                     time.sleep(0.2)
-                    os.system("poweroff")
+                    if osType == 'Windows': os.system('shutdown /s')
+                    if osType == 'Linux': os.system("poweroff")
+                    if osType == 'Darwin': os.system("shutdown -h now")
