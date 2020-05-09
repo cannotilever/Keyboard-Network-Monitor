@@ -1,0 +1,9 @@
+[Unit]
+Description=Ellingtech Host Monitoring Service Desktop Software
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/desktop.py
+
+[Install]
+WantedBy=multi-user.target
