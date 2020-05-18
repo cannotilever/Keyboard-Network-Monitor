@@ -56,4 +56,4 @@ So far, desktop.py has been tested on Ubuntu 20.04 LTS with a logitech G810 but 
 
 ## Next Steps:
 
-The most immediate development priority is bringing Windows support using the logiPy library for keyboard lighting control. Next in priority is an interactive setup process that stores configs in a separate file so that manually adding points via altering the code is no longer necessary. Finally, I know that doing os.system calls to set lighting is not great, so in the future I hope to integrate with g810-led's C++ library as to not make os.system calls.
+The most immediate development priority is bringing Windows support using the logiPy library for keyboard lighting control. Next in priority is an interactive setup process that stores configs in a separate file so that manually adding points via altering the code is no longer necessary. Finally, I know that doing os.system calls to set lighting is not great, so in the future I hope to integrate with g810-led's C++ library as to not make os.system calls
