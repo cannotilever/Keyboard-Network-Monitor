@@ -37,7 +37,10 @@ If the keyboard flashes red when you select a host for monitoring, either the ho
         - At this point, your keyboard should have turned blue and your F keys should be lighting up either green or red.
 
     - Windows Hosts:
-        - Coming Soon
+        - ### A real process is coming soon.
+        - place desktop_windows.py and desktop_config.yaml in the same directory within your user directory
+        - run desktop_windows.py with python
+        -  When you run the windows program, it looks pretty janky as it has to spawn a window and minimize itself. This can be mitigated by using a ping library rather than the windows ping command, but this requires elevated privilidges which I want to avoid, so we're stuck with the self-minimizing window.
     
 - server.py
     - ensure python3 and python3-pip are installed and execute `pip3 install psutil` as root
