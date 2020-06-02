@@ -25,10 +25,11 @@ If the keyboard flashes red when you select a host for monitoring, either the ho
     - Linux Hosts:
         - follow the instructions to install [g810-led](https://github.com/MatMoul/g810-led/blob/master/INSTALL.md), ensure that it is in PATH
         - ensure python3 and python3-pip are installed and execute `pip3 install keyboard psutil` as root
-        - download desktop.py and KeyNetMon_desktop.service
-        - open desktop.py with your favorite editor and add any hosts that you would like to monitor starting at line 198, following the examples there.
+        - download desktop_linux.py, KeyNetMon.service, and desktop_config.yaml
+        - open desktop_config.yaml with your favorite editor and add any hosts that you would like to monitor, changing keys and colors if you like
         - `chmod +x desktop.py`
         - `mv desktop.py /usr/bin/`
+        - `mv desktop_config.yaml /etc/knm/desktop_config.yaml`
         - `mv KeyNetMon_desktop.service /etc/systemd/system/`
         - `systemctl enable KeyNetMon_desktop.service`
         - `systemctl start KeyNetMon_desktop.service`
@@ -52,8 +53,8 @@ If the keyboard flashes red when you select a host for monitoring, either the ho
     
 ## Compatability:
 
-So far, desktop.py has been tested on Ubuntu 20.04 LTS with a logitech G810 but should work on nearly all linux. Also, server.py has been tested on Proxmox VE 6.1, Ubuntu server 20.04 LTS, and Fedora Server Edition 32 but should work on anything that can run python and pip3, although shutdown and reboot won't currently work on Windows hosts.
+So far, desktop.py has been tested on Ubuntu 20.04 LTS with a logitech G810 but should work on nearly all linux. Also, server.py has been tested on Proxmox VE 6.1, Ubuntu server 20.04 LTS, and Fedora Server Edition 32 but should work on anything that can run python3 and pip
 
 ## Next Steps:
 
-The most immediate development priority is bringing Windows support using the logiPy library for keyboard lighting control. Next in priority is an interactive setup process that stores configs in a separate file so that manually adding points via altering the code is no longer necessary. Finally, I know that doing os.system calls to set lighting is not great, so in the future I hope to integrate with g810-led's C++ library as to not make os.system calls.
+I am working on testing stability and functionality on windows (I don't have a windows box to test on right now) as well as a program to automate the generation of configuration files
