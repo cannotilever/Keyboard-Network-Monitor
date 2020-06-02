@@ -8,24 +8,27 @@ import pickle
 import psutil
 import pygetwindow as gw
 from logipy import logi_led as logi
+import yaml
+from requests import get
 logi.logi_led_init()
 time.sleep(0.5)
 selfWindow = gw.getActiveWindow()
 selfWindow.minimize()
-#---Begin Color Definitions---
-yes = 0,100,0
-no = 100,0,0
-black = 0,0,0
-default = 0,12,100
-CPUcolor = 99,53,1
-RAMcolor = 91,99,1
-DSKcolor = 90,0,100
-shutdownColor = 100,0,0
-rebootColor = 100,42,0
-armKcolor = 100,0,0
-#---End Color Definitions---
+config = yaml.load(open('desktop_config.yaml', 'r'), Loader=yaml.FullLoader)
+yes = config['colors']['yes']
+no = config['colors']['no']
+black = config['colors']['black']
+default = config['colors']['default']
+CPUcolor = config['colors']['CPUcolor']
+RAMcolor = config['colors']['RAMcolor']
+DSKcolor = config['colors']['DSKcolor']
+shutdownColor = config['colors']['shutdownColor']
+rebootColor = config['colors']['rebootColor']
+armKcolor = config['colors']['armKcolor']
+pointNames = list(config['hosts'].keys())
 focus = 0 #default focus, no host selected
 loops = 0
+running = True
 doUpdate = False
 armLights = True
 armed = False
@@ -42,16 +45,19 @@ dskKeys = {10.0:44, 20.0:45, 30.0:46, 40.0:47, 50.0:48, 60.0:49, 70.0:50, 80.0:5
 pingTimer = statTimer = time.time()
 armKeys = [79,81,71,73]
 PMerrors = 0
+WAN = get('https://api.ipify.org').text
 class point:
-	def __init__(self, name, address, key, statType):
-		self.name = name
-		self.address = address
-		self.key = key
-		self.statType = statType
-		self.online = no
-		self.doConnect = False
-		points.append(self)
-		keyboard.add_hotkey('shift+{0}'.format(self.key), setFocus, args=[self])
+	def __init__(self):
+		self.name = GetAttribute('name')
+		if self.name is not None:
+			self.address = GetAttribute('address', self.name)
+			if self.address == 'WAN': self.address = WAN
+			self.key = GetAttribute('key', self.name)
+			self.statType = GetAttribute('type', self.name)
+			self.online = no
+			self.doConnect = False
+			points.append(self)
+			keyboard.add_hotkey('shift+{0}'.format(self.key), setFocus, args=[self])
 	def check(self):
 		a = 1
 		a = os.system('ping -n 1 -w 1000 {0} > NUL'.format(self.address))
@@ -122,6 +128,14 @@ def setFocus(what):
 			focus = what
 			focus.doConnect = True
 			doUpdate = True
+def GetAttribute(request, name = None):
+	if request == 'name':
+		if pointNames == []: return None
+		else:
+			temp = pointNames[0]
+			pointNames.remove(temp)
+	else: temp = config['hosts'][name][request]
+	return temp
 def ClearBoard():
 	global loops, doClear
 	logi.logi_led_set_lighting(default[0],default[1],default[2])
@@ -186,6 +200,11 @@ def arm():
 	global armed, armedCD
 	armed = True
 	armedCD = 100
+def leave():
+	global focus, running
+	ClearBoard()
+	focus = 0
+	running = False
 def PowerMan(kind):
 	global PMerrors
 	if focus == 0 or focus.statType == other or not armed:
@@ -223,21 +242,29 @@ def viewStats(): #updates stats every quarter second
 		if focus.statType == 1: focus.details()
 		else: localDetails()
 		statTimer = time.time()
-#----------Start Point Definitions----------
-localhost = point('localhost', socket.gethostbyaddr(socket.gethostname())[2][0], 'esc', local)  
-SamplePoint0 = point('Sample linux server', '192.168.1.10', 'f1', linux)
-SamplePoint1 = point('Sample linux server 2', '192.168.1.11', 'f2', linux)
-SampleOtherPoint = point('Sample other server', '192.168.1.12', 'f3', other) 							
-cloudflare = point("cloudflare", 'www.cloudflare.com', 'f10', other) #other means that the host cannot be monitored							
-aws = point("Amazon Web Service", 'aws.amazon.com', 'f11', other)								
-google = point("Google", 'google.com', 'f12', other)											
-#----------End Point Definitions----------
+s0 = point()
+s1 = point()
+s2 = point()
+s3 = point()
+s4 = point()
+s5 = point()
+s6 = point()
+s7 = point()
+s8 = point()
+s9 = point()
+s10 = point()
+s11 = point()
+s12 = point()
+s13 = point()
+s14 = point()
+s15 = point()
 keyboard.add_hotkey('esc', setFocus, args=[0])
 logi.logi_led_set_lighting(default[0],default[1],default[2])
 keyboard.add_hotkey('ctrl+home', PowerMan, args=[b'reboot'])
 keyboard.add_hotkey('ctrl+end', PowerMan, args=[b'poweroff'])
+keyboard.add_hotkey('ctrl+esc+q', leave)
 keyboard.add_hotkey('ctrl+num 5', arm)
-while True:
+while running:
 	time.sleep(0.05)
 	PingCheck()
 	viewStats()
