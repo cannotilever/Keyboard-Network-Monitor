@@ -1,9 +1,0 @@
-[Unit]
-Description=Ellingtech Host Monitoring Service Endpoint Software
-After=network.target
-
-[Service]
-ExecStart=/usr/bin/point.py
-
-[Install]
-WantedBy=multi-user.target

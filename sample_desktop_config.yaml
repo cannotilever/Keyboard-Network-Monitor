@@ -1,0 +1,65 @@
+#Sample Config file, rename to desktop_config.yaml and place into dir specified in readme
+hosts:
+    "localhost":
+        address: '127.0.0.1'
+        key: 'esc'
+        type: 2
+    "sample":
+        address: '0.0.0.0'
+        key: 'f1'
+        type: 1
+    "sample":
+        address: '0.0.0.0'
+        key: 'f2'
+        type: 0
+    "sample":
+        address: '0.0.0.0'
+        key: 'f3'
+        type: 1
+    "sample":
+        address: '0.0.0.0'
+        key: 'f4'
+        type: 1
+    "sample":
+        address: '0.0.0.0'
+        key: 'f5'
+        type: 0
+    "sample":
+        address: '0.0.0.0'
+        key: 'f6'
+        type: 1
+    "sample":
+        address: '0.0.0.0'
+        key: 'f7'
+        type: 0
+    "Firewall - LAN":
+        address: '192.168.1.1'
+        key: 'f8'
+        type: 0
+    "Firewall - WAN":
+        address: WAN
+        key: 'f9'
+        type: 0
+    "Cloudflare":
+        address: 'www.cloudflare.com'
+        key: 'f10'
+        type: 0
+    "AWS":
+        address: 'aws.amazon.com'
+        key: 'f11'
+        type: 0
+    "Google":
+        address: 'www.google.com'
+        key: 'f12'
+        type: 0
+colors:
+    'yes': '03fc0b'
+    'no': 'fc0303'
+    black: '000000'
+    default: '001eff'
+    CPUcolor: 'c20000'
+    RAMcolor: 'fce303'
+    DSKcolor: 'e600ff'
+    shutdownColor: 'fc0303'
+    rebootColor: 'fc9d03'
+    armKcolor: 'ff0000'
