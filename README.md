@@ -29,6 +29,7 @@ If the keyboard flashes red when you select a host for monitoring, either the ho
         - open desktop_config.yaml with your favorite editor and add any hosts that you would like to monitor, changing keys and colors if you like
         - `chmod +x desktop.py`
         - `mv desktop.py /usr/bin/`
+        - `mkdir /etc/knm`
         - `mv desktop_config.yaml /etc/knm/desktop_config.yaml`
         - `mv KeyNetMon_desktop.service /etc/systemd/system/`
         - `systemctl enable KeyNetMon_desktop.service`

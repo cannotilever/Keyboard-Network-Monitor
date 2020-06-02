@@ -1,6 +1,6 @@
 #Inteface Configuration. 
 #Possible arguments: 
-# all     allows listening for connections on all interfaces
+# all     enables listening for connections on all interfaces
 # auto    system decides IP to listen on, might break 
 # manual  Allows user to specify IP address to listen on with the manualAddress variable
 interfaceConfig: auto

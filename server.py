@@ -7,7 +7,7 @@ import pickle
 import platform
 import yaml
 osType = platform.system()
-confFile = 'server_config.yaml'
+confFile = 'server_config.yaml' #not final config location
 config = yaml.load(open(confFile, 'r'), Loader=yaml.FullLoader)
 if osType != 'Windows' and os.geteuid() != 0:
 	    print("Please execute this script with root!")
